@@ -27,56 +27,61 @@ export const ResultsDashboard = ({ images, metrics }: ResultsDashboardProps) => 
   const confidence = 85 + Math.floor(Math.random() * 10); // 85-95%
 
   return (
-    <section className="py-16">
+    <section className="py-20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-success/10 border border-success/20 text-success text-sm font-semibold mb-6">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-success/10 border border-success/20 text-success text-sm font-semibold mb-6 shadow-lg shadow-success/10">
             <Trophy className="w-4 h-4" />
-            Analysis Complete
+            Step 3 of 3 - Analysis Complete
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Test Results</h2>
-          <p className="text-lg text-muted-foreground">AI scorekeeper agents have evaluated your ad variations</p>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Test Results</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">AI scorekeeper agents have evaluated your ad variations</p>
         </div>
 
         {/* Winner Card */}
-        <Card className="max-w-4xl mx-auto p-10 mb-12 border-2 border-primary/50 bg-gradient-to-br from-primary/10 via-accent/5 to-background shadow-xl">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <Trophy className="w-7 h-7 text-primary-foreground" />
-            </div>
-            <h3 className="text-3xl font-bold">Predicted Winner</h3>
-            <Badge variant="default" className="ml-auto text-base px-4 py-1.5">
-              {confidence}% confidence
-            </Badge>
-          </div>
+        <Card className="relative max-w-5xl mx-auto p-12 mb-16 border-2 border-primary/50 bg-gradient-to-br from-primary/10 via-accent/5 to-background shadow-2xl overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.15),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--accent)/0.15),transparent_50%)]" />
           
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
-              <img 
-                src={images[winner.id]} 
-                alt="Winner"
-                className="relative w-full rounded-xl shadow-2xl"
-              />
-            </div>
-            <div className="space-y-6">
-              <div>
-                <div className="text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                  {winner.overallScore}
-                </div>
-                <p className="text-lg text-muted-foreground">Overall Score</p>
+          <div className="relative z-10">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/30">
+                <Trophy className="w-8 h-8 text-primary-foreground" />
               </div>
-              
-              <div className="space-y-4">
-                {metrics.map(metric => (
-                  <div key={metric} className="p-4 rounded-lg bg-card/50 border border-border/50">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="capitalize font-semibold">{metric}</span>
-                      <span className="font-bold text-primary">{winner.scores[metric]}</span>
-                    </div>
-                    <Progress value={winner.scores[metric]} className="h-2.5" />
+              <h3 className="text-3xl md:text-4xl font-bold">Predicted Winner</h3>
+              <Badge variant="default" className="ml-auto text-base px-5 py-2 shadow-lg">
+                {confidence}% confidence
+              </Badge>
+            </div>
+          
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                <img 
+                  src={images[winner.id]} 
+                  alt="Winner"
+                  className="relative w-full rounded-xl shadow-2xl"
+                />
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <div className="text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+                    {winner.overallScore}
                   </div>
-                ))}
+                  <p className="text-lg text-muted-foreground">Overall Score</p>
+                </div>
+                
+                <div className="space-y-4">
+                  {metrics.map(metric => (
+                    <div key={metric} className="p-4 rounded-lg bg-card/50 border border-border/50">
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="capitalize font-semibold">{metric}</span>
+                        <span className="font-bold text-primary">{winner.scores[metric]}</span>
+                      </div>
+                      <Progress value={winner.scores[metric]} className="h-2.5" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

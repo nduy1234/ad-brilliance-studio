@@ -54,48 +54,54 @@ export const UploadSection = ({ onNext }: UploadSectionProps) => {
   };
 
   return (
-    <section className="py-16">
+    <section className="py-20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Upload or Generate Your Ads</h2>
-          <p className="text-lg text-muted-foreground">Add multiple variations to test and compare performance</p>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-6">
+            <Wand2 className="w-4 h-4" />
+            Step 1 of 3
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Upload or Generate Your Ads</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Add multiple variations to test and compare performance</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-10">
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
           {/* Upload Card */}
-          <Card className="group p-10 border-2 border-dashed border-border/60 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 cursor-pointer">
-            <div className="text-center">
-              <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                <Upload className="w-10 h-10 text-primary" />
+          <Card className="group relative p-12 border-2 border-dashed border-border/60 hover:border-primary/60 hover:bg-primary/5 transition-all duration-500 cursor-pointer overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10 text-center">
+              <div className="w-24 h-24 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-500 shadow-lg shadow-primary/10 group-hover:shadow-xl group-hover:shadow-primary/20">
+                <Upload className="w-12 h-12 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-3">Upload Ads</h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">Upload your existing ad creatives for AI analysis</p>
+              <h3 className="text-2xl font-bold mb-4">Upload Ads</h3>
+              <p className="text-muted-foreground mb-10 leading-relaxed text-base">Upload your existing ad creatives for AI analysis</p>
               <Input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleFileUpload}
-                className="cursor-pointer hover:border-primary transition-colors"
+                className="cursor-pointer hover:border-primary transition-colors text-base py-6"
               />
             </div>
           </Card>
 
           {/* Generate Card */}
-          <Card className="group p-10 border-2 border-dashed border-border/60 hover:border-accent/60 hover:bg-accent/5 transition-all duration-300">
-            <div className="text-center">
-              <div className="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:bg-accent/20 transition-all">
-                <Wand2 className="w-10 h-10 text-accent" />
+          <Card className="group relative p-12 border-2 border-dashed border-border/60 hover:border-accent/60 hover:bg-accent/5 transition-all duration-500 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10 text-center">
+              <div className="w-24 h-24 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:bg-accent/20 transition-all duration-500 shadow-lg shadow-accent/10 group-hover:shadow-xl group-hover:shadow-accent/20">
+                <Wand2 className="w-12 h-12 text-accent" />
               </div>
-              <h3 className="text-2xl font-bold mb-3">Generate with AI</h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">Describe your ad concept and let AI create variations</p>
+              <h3 className="text-2xl font-bold mb-4">Generate with AI</h3>
+              <p className="text-muted-foreground mb-10 leading-relaxed text-base">Describe your ad concept and let AI create variations</p>
               <div className="flex gap-3">
                 <Input
                   placeholder="e.g., Modern tech product launch..."
                   value={generatePrompt}
                   onChange={(e) => setGeneratePrompt(e.target.value)}
-                  className="text-base"
+                  className="text-base py-6"
                 />
-                <Button onClick={handleGenerate} className="whitespace-nowrap px-6 hover:shadow-lg transition-shadow">
+                <Button onClick={handleGenerate} className="whitespace-nowrap px-8 py-6 text-base hover:shadow-xl transition-all duration-300">
                   Generate
                 </Button>
               </div>

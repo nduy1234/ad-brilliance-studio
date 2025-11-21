@@ -34,11 +34,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+      <header className="border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent" />
-            <span className="font-bold text-xl">AdTest AI</span>
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20" />
+            <span className="font-bold text-xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">AdTest AI</span>
           </div>
           
           {currentStep !== "hero" && (
@@ -59,9 +59,13 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t py-8 mt-20">
-        <div className="container mx-auto px-6 text-center text-muted-foreground">
-          <p>© 2024 AdTest AI. Powered by advanced AI agents.</p>
+      <footer className="border-t border-border/40 py-12 mt-24 bg-gradient-to-br from-secondary/30 to-background">
+        <div className="container mx-auto px-6 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20" />
+            <span className="font-bold text-lg">AdTest AI</span>
+          </div>
+          <p className="text-muted-foreground text-sm">© 2024 AdTest AI. Powered by advanced multimodal AI agents.</p>
         </div>
       </footer>
     </div>
