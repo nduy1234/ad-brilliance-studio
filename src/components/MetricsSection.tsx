@@ -29,14 +29,14 @@ export const MetricsSection = ({ onRunTest }: MetricsSectionProps) => {
   };
 
   return (
-    <section className="py-12 bg-secondary/30">
+    <section className="py-16 bg-gradient-to-b from-secondary/30 to-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-10">
-          <h2 className="text-4xl font-bold mb-4">Select Testing Metrics</h2>
-          <p className="text-lg text-muted-foreground">Choose what aspects to evaluate</p>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Select Testing Metrics</h2>
+          <p className="text-lg text-muted-foreground">Choose which aspects our AI scorekeeper agents will evaluate</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
           {availableMetrics.map((metric) => {
             const Icon = metric.icon;
             const isSelected = selectedMetrics.includes(metric.id);
@@ -44,8 +44,10 @@ export const MetricsSection = ({ onRunTest }: MetricsSectionProps) => {
             return (
               <Card 
                 key={metric.id}
-                className={`p-6 cursor-pointer transition-all hover:shadow-lg ${
-                  isSelected ? 'border-2 border-primary shadow-md' : 'border-2 border-transparent'
+                className={`group p-8 cursor-pointer transition-all duration-300 ${
+                  isSelected 
+                    ? 'border-2 border-primary shadow-lg bg-primary/5 scale-105' 
+                    : 'border-2 border-border/50 hover:border-primary/30 hover:shadow-md hover:scale-102'
                 }`}
                 onClick={() => toggleMetric(metric.id)}
               >
@@ -53,14 +55,20 @@ export const MetricsSection = ({ onRunTest }: MetricsSectionProps) => {
                   <Checkbox 
                     checked={isSelected}
                     onCheckedChange={() => toggleMetric(metric.id)}
-                    className="mt-1"
+                    className="mt-1.5 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                   />
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon className={`w-5 h-5 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
-                      <h3 className="font-semibold">{metric.label}</h3>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                        isSelected ? 'bg-primary/20' : 'bg-muted'
+                      }`}>
+                        <Icon className={`w-5 h-5 transition-colors ${
+                          isSelected ? 'text-primary' : 'text-muted-foreground'
+                        }`} />
+                      </div>
+                      <h3 className="font-bold text-lg">{metric.label}</h3>
                     </div>
-                    <p className="text-sm text-muted-foreground">{metric.description}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{metric.description}</p>
                   </div>
                 </div>
               </Card>
@@ -68,15 +76,18 @@ export const MetricsSection = ({ onRunTest }: MetricsSectionProps) => {
           })}
         </div>
 
-        <div className="text-center">
+        <div className="text-center space-y-4">
           <Button 
             size="lg"
             onClick={() => onRunTest(selectedMetrics)}
             disabled={selectedMetrics.length === 0}
-            className="shadow-lg"
+            className="px-10 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
           >
-            Run AI Test ({selectedMetrics.length} metrics)
+            Run AI Test ({selectedMetrics.length} {selectedMetrics.length === 1 ? 'metric' : 'metrics'})
           </Button>
+          {selectedMetrics.length === 0 && (
+            <p className="text-sm text-muted-foreground">Select at least one metric to continue</p>
+          )}
         </div>
       </div>
     </section>
